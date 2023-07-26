@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class notes : MonoBehaviour
+public class Notes : MonoBehaviour
 {
-    [SerializeField]
-    float speedX;
-    [SerializeField]
-    float speedY;
-    [SerializeField]
-    float speedZ;
-
-    void Update()
+    int notes = 0; //counter
+    [SerializeField] Text noteText; //use this to see how many notes you collect on screen
+    private void OnTriggerEnter(Collider other)
     {
-        transform.Rotate(360 * speedX * Time.deltaTime, 360 * speedY * Time.deltaTime, 360 * speedZ * Time.deltaTime);
+        //if trigger is true use this method
+        if (other.gameObject.CompareTag("Notes"))
+        {
+            Destroy(other.gameObject);
+            notes++;
+            Debug.Log("Notes: " + notes);
+            //noteText.text = "Notes collected: " + notes;
+        }
     }
 }
